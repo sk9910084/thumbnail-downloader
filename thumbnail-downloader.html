@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script>(function(s){s.dataset.zone='11946275',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+  <script>(function(s){s.dataset.zone='11946272',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+  <script>(function(s){s.dataset.zone='11946191',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="icon" href="data:," />
+  <title>Thumbnail Downloader</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600;700&family=Manrope:wght@500;650;750;800&display=swap');
+    :root {
+      color-scheme: light dark;
+      --bg: #f4f1e9;
+      --paper: #fffdf7;
+      --ink: #151515;
+      --muted: #5f5c55;
+      --line: #d5d0c5;
+      --accent: #f0542d;
+      --accent-hover: #d94420;
+      --accent-soft: #ffe2d8;
+      --button-ink: #ffffff;
+      --field: #ffffff;
+      --shadow: 0 18px 48px rgba(37, 31, 23, .10);
+      --focus: #1f6feb;
+      --success: #0a7754;
+      --error: #b3261e;
+      --checker: #e3dfd5;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #121212;
+        --paper: #1b1b1a;
+        --ink: #f5f1e9;
+        --muted: #bcb6aa;
+        --line: #3e3d39;
+        --accent: #ff6843;
+        --accent-hover: #ff7d5e;
+        --accent-soft: #49241b;
+        --button-ink: #16100e;
+        --field: #222220;
+        --shadow: 0 22px 60px rgba(0, 0, 0, .34);
+        --focus: #76a9ff;
+        --success: #57d4aa;
+        --error: #ff8d86;
+        --checker: #282825;
+      }
+    }
+    * { box-sizing: border-box; }
+    html { min-height: 100%; background: var(--bg); }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      background:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px),
+        var(--bg);
+      background-size: 44px 44px;
+      font-family: "Hind", system-ui, sans-serif;
+      font-size: 17px;
+      line-height: 1.45;
+    }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    .page {
+      width: min(1080px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: clamp(42px, 7vw, 88px) 0 max(56px, env(safe-area-inset-bottom));
+    }
+    .hero { max-width: 760px; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin: 0 0 14px;
+      color: var(--accent);
+      font: 750 13px/1 "Manrope", sans-serif;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 30px; height: 3px; background: currentColor; }
+    h1 {
+      margin: 0;
+      max-width: 700px;
+      font: 800 clamp(38px, 7vw, 76px)/.98 "Manrope", sans-serif;
+      letter-spacing: -.055em;
+      text-wrap: balance;
+    }
+    .intro {
+      max-width: 620px;
+      margin: 20px 0 0;
+      color: var(--muted);
+      font-size: clamp(18px, 2vw, 21px);
+    }
+    .workbench {
+      position: relative;
+      margin-top: clamp(32px, 6vw, 62px);
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+    .workbench::before {
+      content: "01";
+      position: absolute;
+      right: 18px;
+      top: 14px;
+      color: var(--line);
+      font: 800 44px/1 "Manrope", sans-serif;
+      pointer-events: none;
+    }
+    .input-zone { padding: clamp(24px, 5vw, 50px); }
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: 700;
+      font-size: 18px;
+    }
+    .url-row { display: grid; grid-template-columns: 1fr auto auto; gap: 10px; }
+    .input-wrap { position: relative; min-width: 0; }
+    .input-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 21px;
+      height: 21px;
+      color: var(--muted);
+      pointer-events: none;
+    }
+    input {
+      width: 100%;
+      height: 56px;
+      border: 1.5px solid var(--line);
+      background: var(--field);
+      color: var(--ink);
+      padding: 0 15px 0 48px;
+      border-radius: 2px;
+      outline: none;
+      font-family: "Manrope", sans-serif;
+      font-size: 15px;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    input::placeholder { color: var(--muted); opacity: .78; }
+    input:focus { border-color: var(--focus); box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 22%, transparent); }
+    .btn {
+      min-height: 56px;
+      border: 0;
+      border-radius: 2px;
+      padding: 0 21px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      font-weight: 700;
+      white-space: nowrap;
+      transition: background .15s, color .15s, transform .15s;
+    }
+    .btn:active { transform: translateY(1px); }
+    .btn:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+    .btn svg { width: 19px; height: 19px; }
+    .btn-primary { background: var(--accent); color: var(--button-ink); }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-ghost { background: var(--accent-soft); color: var(--ink); }
+    .btn-ghost:hover { background: color-mix(in srgb, var(--accent-soft) 78%, var(--accent)); }
+    .helper { margin: 11px 0 0; color: var(--muted); font-size: 14px; }
+    .message {
+      min-height: 24px;
+      margin: 13px 0 0;
+      font-weight: 600;
+      font-size: 15px;
+    }
+    .message.error { color: var(--error); }
+    .message.success { color: var(--success); }
+    .loader { display: none; align-items: center; gap: 10px; color: var(--muted); }
+    .loader.show { display: flex; }
+    .spinner {
+      width: 17px;
+      height: 17px;
+      border: 2px solid var(--line);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+    .result {
+      display: none;
+      border-top: 1px solid var(--line);
+    }
+    .result.show { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr); }
+    .preview-pane {
+      padding: clamp(20px, 4vw, 38px);
+      background:
+        linear-gradient(45deg, var(--checker) 25%, transparent 25%) 0 0 / 20px 20px,
+        linear-gradient(45deg, transparent 75%, var(--checker) 75%) 0 0 / 20px 20px,
+        linear-gradient(45deg, transparent 75%, var(--checker) 75%) -10px 10px / 20px 20px,
+        linear-gradient(45deg, var(--checker) 25%, var(--paper) 25%) 10px -10px / 20px 20px;
+      display: grid;
+      align-items: center;
+      min-height: 320px;
+    }
+    .preview-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #0b0b0b;
+      box-shadow: 0 10px 28px rgba(0,0,0,.18);
+      overflow: hidden;
+    }
+    .preview-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .quality-tag {
+      position: absolute;
+      right: 9px;
+      bottom: 9px;
+      background: rgba(15,15,15,.86);
+      color: white;
+      padding: 5px 8px;
+      font: 700 12px/1 "Manrope", sans-serif;
+    }
+    .result-panel {
+      border-left: 1px solid var(--line);
+      padding: clamp(24px, 4vw, 38px);
+      display: flex;
+      flex-direction: column;
+    }
+    .result-panel h2 { margin: 0 0 7px; font: 750 25px/1.2 "Manrope", sans-serif; letter-spacing: -.03em; }
+    .meta { margin: 0 0 22px; color: var(--muted); font-size: 15px; }
+    .quality-list { display: grid; gap: 9px; }
+    .quality-button {
+      width: 100%;
+      min-height: 52px;
+      border: 1px solid var(--line);
+      background: var(--field);
+      color: var(--ink);
+      padding: 8px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-align: left;
+      border-radius: 2px;
+    }
+    .quality-button:hover { border-color: var(--accent); }
+    .quality-button strong { display: block; font: 700 14px/1.2 "Manrope", sans-serif; }
+    .quality-button small { color: var(--muted); }
+    .quality-button svg { width: 20px; height: 20px; color: var(--accent); flex: none; }
+    .quality-button[disabled] { opacity: .5; cursor: not-allowed; }
+    .note {
+      margin-top: auto;
+      padding-top: 22px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .how {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0;
+      margin-top: 28px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+    }
+    .step { padding: 24px; min-height: 140px; }
+    .step + .step { border-left: 1px solid var(--line); }
+    .step-no { display: block; margin-bottom: 17px; color: var(--accent); font: 800 13px/1 "Manrope", sans-serif; }
+    .step strong { display: block; margin-bottom: 4px; font: 750 17px/1.25 "Manrope", sans-serif; }
+    .step p { margin: 0; color: var(--muted); font-size: 15px; }
+    footer { margin-top: 22px; color: var(--muted); font-size: 13px; }
+    @media (max-width: 760px) {
+      .page { width: min(100% - 22px, 620px); padding-top: 34px; }
+      .url-row { grid-template-columns: 1fr 56px; }
+      .btn-primary { grid-column: 1 / -1; }
+      .btn-ghost { padding: 0; }
+      .btn-ghost .paste-text { display: none; }
+      .result.show { grid-template-columns: 1fr; }
+      .preview-pane { min-height: 0; }
+      .result-panel { border-left: 0; border-top: 1px solid var(--line); }
+      .how { grid-template-columns: 1fr; }
+      .step { min-height: 0; }
+      .step + .step { border-left: 0; border-top: 1px solid var(--line); }
+    }
+    @media (max-width: 390px) {
+      h1 { font-size: 36px; }
+      .input-zone, .result-panel { padding: 21px; }
+      .preview-pane { padding: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero" aria-labelledby="main-title">
+      <p class="eyebrow">YouTube utility</p>
+      <h1 id="main-title">Get a clean video thumbnail.</h1>
+      <p class="intro">Paste a YouTube video or Shorts link. Choose the best available quality and download the JPG directly to your phone.</p>
+    </section>
+
+    <section class="workbench" aria-label="Thumbnail download tool">
+      <div class="input-zone">
+        <label for="video-url">YouTube link or Video ID</label>
+        <div class="url-row">
+          <div class="input-wrap">
+            <svg class="input-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.07.07l2-2a5 5 0 0 0-7.07-7.07l-1.15 1.15"/><path d="M14 11a5 5 0 0 0-7.07-.07l-2 2A5 5 0 0 0 12 20l1.15-1.15"/></svg>
+            <input id="video-url" inputmode="url" autocomplete="off" spellcheck="false" placeholder="https://youtu.be/…" aria-describedby="url-help status-message" />
+          </div>
+          <button class="btn btn-ghost" id="paste-btn" type="button" title="Paste from clipboard">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="13" rx="2"/><path d="M15 9V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h4"/></svg>
+            <span class="paste-text">Paste</span>
+          </button>
+          <button class="btn btn-primary" id="find-btn" type="button">
+            Find thumbnail
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+        </div>
+        <p class="helper" id="url-help">Watch, Shorts, Live, and youtu.be links are supported.</p>
+        <div class="loader" id="loader" role="status"><span class="spinner" aria-hidden="true"></span>Checking the best available quality…</div>
+        <p class="message" id="status-message" aria-live="polite"></p>
+      </div>
+
+      <div class="result" id="result">
+        <div class="preview-pane">
+          <div class="preview-frame">
+            <img id="thumbnail-preview" alt="YouTube video thumbnail preview" />
+            <span class="quality-tag" id="preview-size">—</span>
+          </div>
+        </div>
+        <aside class="result-panel">
+          <h2>Choose quality</h2>
+          <p class="meta" id="video-meta">Video ID</p>
+          <div class="quality-list" id="quality-list"></div>
+          <p class="note">Respect the video owner's rights when using a downloaded image.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="how" aria-label="How to use this tool">
+      <div class="step"><span class="step-no">01</span><strong>Copy the link</strong><p>Tap Share in the YouTube app and copy the video link.</p></div>
+      <div class="step"><span class="step-no">02</span><strong>Paste it here</strong><p>Enter the link and tap “Find thumbnail.”</p></div>
+      <div class="step"><span class="step-no">03</span><strong>Download</strong><p>Choose your preferred JPG from the available qualities.</p></div>
+    </section>
+    <footer>This tool is for public YouTube thumbnails only.</footer>
+  </main>
+
+  <script>
+    (function () {
+      var telegramWebApp = window.Telegram && window.Telegram.WebApp;
+      if (telegramWebApp) {
+        var applyTelegramTheme = function () {
+          var telegramTheme = telegramWebApp.themeParams || {};
+          var rootStyle = document.documentElement.style;
+          var surface = telegramTheme.section_bg_color || telegramTheme.secondary_bg_color;
+          if (telegramTheme.bg_color) rootStyle.setProperty('--bg', telegramTheme.bg_color);
+          if (surface) rootStyle.setProperty('--paper', surface);
+          if (surface) rootStyle.setProperty('--field', surface);
+          if (telegramTheme.text_color) rootStyle.setProperty('--ink', telegramTheme.text_color);
+          if (telegramTheme.hint_color) rootStyle.setProperty('--muted', telegramTheme.hint_color);
+          if (telegramTheme.section_separator_color) rootStyle.setProperty('--line', telegramTheme.section_separator_color);
+          if (telegramTheme.button_color) rootStyle.setProperty('--accent', telegramTheme.button_color);
+          if (telegramTheme.button_color) rootStyle.setProperty('--accent-hover', telegramTheme.button_color);
+          if (telegramTheme.button_text_color) rootStyle.setProperty('--button-ink', telegramTheme.button_text_color);
+          if (telegramTheme.link_color) rootStyle.setProperty('--focus', telegramTheme.link_color);
+          document.documentElement.style.colorScheme = telegramWebApp.colorScheme || 'light';
+        };
+        applyTelegramTheme();
+        telegramWebApp.onEvent('themeChanged', applyTelegramTheme);
+        telegramWebApp.ready();
+      }
+
+      var input = document.getElementById('video-url');
+      var findBtn = document.getElementById('find-btn');
+      var pasteBtn = document.getElementById('paste-btn');
+      var result = document.getElementById('result');
+      var preview = document.getElementById('thumbnail-preview');
+      var previewSize = document.getElementById('preview-size');
+      var status = document.getElementById('status-message');
+      var loader = document.getElementById('loader');
+      var qualityList = document.getElementById('quality-list');
+      var videoMeta = document.getElementById('video-meta');
+      var activeObjectUrl = null;
+      var qualityDefs = [
+        { file: 'maxresdefault.jpg', name: 'Maximum', hint: 'Best available quality' },
+        { file: 'sddefault.jpg', name: 'Standard', hint: 'For larger screens' },
+        { file: 'hqdefault.jpg', name: 'High', hint: 'For everyday use' },
+        { file: 'mqdefault.jpg', name: 'Medium', hint: 'Smaller file' }
+      ];
+
+      function setMessage(text, kind) {
+        status.textContent = text || '';
+        status.className = 'message' + (kind ? ' ' + kind : '');
+      }
+
+      function extractVideoId(value) {
+        var text = (value || '').trim();
+        if (/^[a-zA-Z0-9_-]{11}$/.test(text)) return text;
+        try {
+          var url = new URL(text);
+          var host = url.hostname.replace(/^www\./, '').replace(/^m\./, '');
+          var id = '';
+          if (host === 'youtu.be') id = url.pathname.split('/')[1] || '';
+          else if (host === 'youtube.com' || host === 'music.youtube.com') {
+            if (url.pathname === '/watch') id = url.searchParams.get('v') || '';
+            else {
+              var parts = url.pathname.split('/').filter(Boolean);
+              if (['shorts', 'live', 'embed'].indexOf(parts[0]) !== -1) id = parts[1] || '';
+            }
+          }
+          id = id.split(/[?&#/]/)[0];
+          return /^[a-zA-Z0-9_-]{11}$/.test(id) ? id : null;
+        } catch (e) { return null; }
+      }
+
+      function fetchImage(videoId, quality) {
+        var url = 'https://img.youtube.com/vi/' + encodeURIComponent(videoId) + '/' + quality.file;
+        return fetch(url, { mode: 'cors', cache: 'no-store' }).then(function (response) {
+          if (!response.ok) throw new Error('not found');
+          return response.blob();
+        }).then(function (blob) {
+          if (!/^image\//.test(blob.type)) throw new Error('not image');
+          return new Promise(function (resolve, reject) {
+            var objectUrl = URL.createObjectURL(blob);
+            var img = new Image();
+            img.onload = function () {
+              var data = { blob: blob, objectUrl: objectUrl, width: img.naturalWidth, height: img.naturalHeight, quality: quality };
+              if (img.naturalWidth <= 120 && img.naturalHeight <= 90) {
+                URL.revokeObjectURL(objectUrl);
+                reject(new Error('placeholder'));
+              } else resolve(data);
+            };
+            img.onerror = function () { URL.revokeObjectURL(objectUrl); reject(new Error('decode')); };
+            img.src = objectUrl;
+          });
+        });
+      }
+
+      function downloadBlob(item, videoId) {
+        var url = URL.createObjectURL(item.blob);
+        var anchor = document.createElement('a');
+        anchor.href = url;
+        anchor.download = 'thumbnail-' + videoId + '-' + item.quality.file;
+        document.body.appendChild(anchor);
+        anchor.click();
+        anchor.remove();
+        setTimeout(function () { URL.revokeObjectURL(url); }, 1500);
+        setMessage(item.quality.name + ' quality download started.', 'success');
+      }
+
+      function qualityButton(item, videoId) {
+        var button = document.createElement('button');
+        button.className = 'quality-button';
+        button.type = 'button';
+        button.innerHTML = '<span><strong>' + item.quality.name + '</strong><small>' + item.width + ' × ' + item.height + ' px</small></span>' +
+          '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>';
+        button.addEventListener('click', function () { downloadBlob(item, videoId); });
+        return button;
+      }
+
+      function findThumbnail() {
+        var videoId = extractVideoId(input.value);
+        setMessage('', '');
+        result.classList.remove('show');
+        if (!videoId) {
+          setMessage('Enter a valid YouTube link or 11-character Video ID.', 'error');
+          input.focus();
+          return;
+        }
+        loader.classList.add('show');
+        findBtn.disabled = true;
+        qualityList.innerHTML = '';
+
+        Promise.allSettled(qualityDefs.map(function (q) { return fetchImage(videoId, q); }))
+          .then(function (settled) {
+            var available = settled.filter(function (entry) { return entry.status === 'fulfilled'; }).map(function (entry) { return entry.value; });
+            loader.classList.remove('show');
+            findBtn.disabled = false;
+            if (!available.length) {
+              setMessage('No thumbnail was found for this video. Check the link and try again.', 'error');
+              return;
+            }
+            if (activeObjectUrl) URL.revokeObjectURL(activeObjectUrl);
+            activeObjectUrl = available[0].objectUrl;
+            preview.src = activeObjectUrl;
+            previewSize.textContent = available[0].width + ' × ' + available[0].height;
+            videoMeta.textContent = 'Video ID · ' + videoId;
+            available.forEach(function (item) { qualityList.appendChild(qualityButton(item, videoId)); });
+            result.classList.add('show');
+            setMessage(available.length + (available.length === 1 ? ' quality is' : ' qualities are') + ' available.', 'success');
+            result.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'nearest' });
+          }).catch(function () {
+            loader.classList.remove('show');
+            findBtn.disabled = false;
+            setMessage('The thumbnail could not be loaded. Check your internet connection and try again.', 'error');
+          });
+      }
+
+      findBtn.addEventListener('click', findThumbnail);
+      input.addEventListener('keydown', function (event) { if (event.key === 'Enter') findThumbnail(); });
+      pasteBtn.addEventListener('click', function () {
+        if (!navigator.clipboard || !navigator.clipboard.readText) {
+          setMessage('Automatic paste is not available in this browser. Press and hold to paste the link.', 'error');
+          input.focus();
+          return;
+        }
+        navigator.clipboard.readText().then(function (text) {
+          input.value = text;
+          setMessage('Link pasted.', 'success');
+          input.focus();
+        }).catch(function () {
+          setMessage('Clipboard permission was not granted. Press and hold to paste the link.', 'error');
+          input.focus();
+        });
+      });
+    }());
+  </script>
+</body>
+</html>
